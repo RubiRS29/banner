@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+
+<head th:replace="layout/layout :: head"> </head>
+<body>
+
+    <header th:replace="layout/layout :: header"> </header>
+
+    <div class="container">
+        <h1 th:text="${tittle}"></h1>
+    </div>
+
+    <form th:action="@{/form}" th:object="${client}" method="post">
+
+        <span th:if="${invalid != null && #strings.isEmpty(invalid) == false}" th:text="${invalid}"></span>
+
+        <table class="table table-bordered">
+            <input type="hidden" th:field="*{id}"/>
+            <tr>
+                <td style="width:200px">Name</td>
+                <td>
+                    <input type="text" th:field="*{name}" class="form-control" th:errorclass="'form-control alert-danger'" />
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
+                </td>
+            </tr>
+            <tr>
+                <td>Last name</td>
+                <td>
+                    <input type="text" th:field="*{lastName}" class="form-control" th:errorclass="'form-control alert-danger'" />
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></small>
+                </td>
+            </tr>
+            <tr>
+                <td>Email </td>
+                <td>
+                    <input type="email" th:field="*{email}" class="form-control" th:errorclass="'form-control alert-danger'" />
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+                </td>
+            </tr>
+            <tr>
+                <td>Date </td>
+                <td>
+                    <input type="text" th:field="*{createdAt}" class="form-control" placeholder="YYYY-MM-DD"/>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('createdAt')}" th:errors="*{createdAt}"></small>
+                </td>
+            </tr>
+            <tr>
+                <td> <input type="submit" value="Register" class="form-control"/> </td>
+            </tr>
+
+        </table>
+    </form>
+
+
+    <footer th:replace="layout/layout :: footer"> </footer>
+</body>
+
+</html>
