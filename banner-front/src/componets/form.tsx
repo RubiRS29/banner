@@ -86,17 +86,20 @@ export const FormBanners = () => {
                 extenFiles.push(file.type);
             });
 
-            console.log(extenFiles.sort());
-            console.log(exten.sort());
 
             if(extenFiles.sort() != exten.sort()) {
 
                 const notIncludes = exten.filter(element => !extenFiles.includes(element))
 
                 message += notIncludes.toString()
-                console.log(message);
 
+                const popMessage = document.getElementById("pop-message");
+
+                popMessage?.removeAttribute("hidden");
+                setMessage(message);
+                
             }
+
 
             setFiles([...files, ...filesArray])
 
